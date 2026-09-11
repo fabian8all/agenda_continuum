@@ -3,7 +3,7 @@
 Sistema web institucional para la reserva y gestión de escenarios educativos (aulas, laboratorios, talleres y auditorios). Permite a los profesores consultar disponibilidad horaria en tiempo  
 real y solicitar reservas de aulas según capacidad y equipamiento requerido, previniendo el solapamiento de horarios.
 
-**Estado actual:** Fase inicial. Protocolo Continuum configurado; pendiente inicializar estructura base de Laravel y migraciones.
+**Estado actual:** Fase inicial. Estructura base de Laravel 11, Livewire v3, Tailwind CSS y Sail configurados y verificados. Pendiente implementar modelo de datos y migraciones.
 
 ## Stack
     - **Backend:** Laravel 11.x (PHP 8.2+)
