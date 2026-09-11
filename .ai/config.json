@@ -1,6 +1,6 @@
 {
-  "project": "{{NOMBRE_DEL_PROYECTO}}",
-  "providers": ["claude", "codex", "gemini", "copilot"],
+  "project": "{{Prueba-Continuum}}",
+  "providers": ["claude", "gemini"],
   "estado_dev": {
     "path": ".ai/state/estado-dev.md",
     "max_index_lines": 80,
@@ -21,6 +21,6 @@
     "dir": ".ai/roles",
     "packs": ["comun"]
   },
-  "template_remote": "",
-  "template_prefix": ""
+  "template_remote": "continuum",
+  "template_prefix": "."
 }
