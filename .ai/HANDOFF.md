@@ -5,150 +5,57 @@
 > Este borrador se generó automáticamente al cortar la sesión (hook SessionEnd/PreCompact o pre-push). Complementa manualmente el 'por qué' y el 'siguiente paso' antes de continuar en otra sesión.
 
 ## Último commit
-`3c7080f chore: inicializa configuración y memoria base de Continuum`
+`e90aaf8 chore: actualiza memoria y handoff de Continuum, deja de trackear pycache`
 
 ## Cambios sin commitear
 ```
-M .ai/HANDOFF.md
- M .ai/state/topics/arquitectura.md
- M .ai/state/topics/comandos.md
- M .ai/state/topics/resumen.md
- D .gitignore-continuum-fragment
- M tools/_continuum/__init__.py
- M tools/_continuum/__main__.py
- M tools/_continuum/__pycache__/__init__.cpython-310.pyc
- M tools/_continuum/__pycache__/__main__.cpython-310.pyc
- M tools/_continuum/__pycache__/bootstrap.cpython-310.pyc
- M tools/_continuum/__pycache__/common.cpython-310.pyc
- M tools/_continuum/__pycache__/context.cpython-310.pyc
- M tools/_continuum/__pycache__/doctor.cpython-310.pyc
- M tools/_continuum/__pycache__/github.cpython-310.pyc
- M tools/_continuum/__pycache__/handoff.cpython-310.pyc
- M tools/_continuum/__pycache__/memory.cpython-310.pyc
- M tools/_continuum/__pycache__/metrics.cpython-310.pyc
- M tools/_continuum/__pycache__/packets.cpython-310.pyc
- M tools/_continuum/__pycache__/release.cpython-310.pyc
- M tools/_continuum/__pycache__/roles.cpython-310.pyc
- M tools/_continuum/__pycache__/session.cpython-310.pyc
- M tools/_continuum/__pycache__/status.cpython-310.pyc
- M tools/_continuum/__pycache__/tasks.cpython-310.pyc
- M tools/_continuum/bootstrap.py
- M tools/_continuum/common.py
- M tools/_continuum/context.py
- M tools/_continuum/doctor.py
- M tools/_continuum/github.py
- M tools/_continuum/handoff.py
- M tools/_continuum/memory.py
- M tools/_continuum/metrics.py
- M tools/_continuum/packets.py
- M tools/_continuum/release.py
- M tools/_continuum/roles.py
- M tools/_continuum/session.py
- M tools/_continuum/status.py
- M tools/_continuum/tasks.py
- M tools/continuum
-?? .ai/state/archive/handoffs/
-?? .ai/tasks/modelo-espacios-reservas/
-?? .editorconfig
-?? .env.example
-?? .gitattributes
-?? .gitignore
-?? agenda_escenarios
-?? app/
-?? artisan
-?? bootstrap/
-?? compose.yaml
-?? composer.json
-?? composer.lock
-?? config/
-?? database/
-?? docker-compose.yml
-?? package-lock.json
-?? package.json
-?? phpunit.xml
-?? postcss.config.js
-?? public/
-?? resources/
-?? routes/
-?? storage/
-?? tailwind.config.js
-?? tests/
-?? vite.config.js
+?? .ai/state/archive/handoffs/2026-09-11T230028Z.md
 ```
 
 ## Resumen de diff vs HEAD
-```
-.ai/HANDOFF.md                                     | 130 +++++++++++++++++----
- .ai/state/topics/arquitectura.md                   |   2 +-
- .ai/state/topics/comandos.md                       |  20 ++++
- .ai/state/topics/resumen.md                        |   4 +-
- .gitignore-continuum-fragment                      |   7 --
- .../__pycache__/__init__.cpython-310.pyc           | Bin 348 -> 348 bytes
- .../__pycache__/__main__.cpython-310.pyc           | Bin 10071 -> 10071 bytes
- .../__pycache__/bootstrap.cpython-310.pyc          | Bin 4839 -> 4839 bytes
- .../_continuum/__pycache__/common.cpython-310.pyc  | Bin 4925 -> 4925 bytes
- .../_continuum/__pycache__/context.cpython-310.pyc | Bin 5905 -> 5905 bytes
- .../_continuum/__pycache__/doctor.cpython-310.pyc  | Bin 12180 -> 12180 bytes
- .../_continuum/__pycache__/github.cpython-310.pyc  | Bin 3172 -> 3172 bytes
- .../_continuum/__pycache__/handoff.cpython-310.pyc | Bin 4505 -> 4505 bytes
- .../_continuum/__pycache__/memory.cpython-310.pyc  | Bin 6247 -> 6247 bytes
- .../_continuum/__pycache__/metrics.cpython-310.pyc | Bin 7805 -> 7805 bytes
- .../_continuum/__pycache__/packets.cpython-310.pyc | Bin 2714 -> 2714 bytes
- .../_continuum/__pycache__/release.cpython-310.pyc | Bin 5351 -> 5351 bytes
- tools/_continuum/__pycache__/roles.cpython-310.pyc | Bin 4405 -> 4405 bytes
- .../_continuum/__pycache__/session.cpython-310.pyc | Bin 3377 -> 3377 bytes
- .../_continuum/__pycache__/status.cpython-310.pyc  | Bin 3058 -> 3058 bytes
- tools/_continuum/__pycache__/tasks.cpython-310.pyc | Bin 8824 -> 8824 bytes
- 21 files changed, 130 insertions(+), 33 deletions(-)
-```
+(sin diferencias)
 
 ## Objetivo de esta sesión
-Continuar la tarea `modelo-espacios-reservas`: modelos Eloquent `Space` y
-`Booking`, relaciones, prevención de solapamientos horarios, factories,
-seeders y tests (Pasos 2-5 de `.ai/tasks/modelo-espacios-reservas/execution-plan.md`).
+Cerrar por completo la tarea `modelo-espacios-reservas` y dejar el
+repositorio limpio y consistente. Se hizo, en orden:
 
-**Archivos modificados/creados:**
-- `app/Models/Space.php`, `app/Models/Booking.php` (nuevos).
-- `app/Models/User.php` — agrega `role` a `$fillable` y relación `bookings()`.
-- `database/factories/SpaceFactory.php`, `BookingFactory.php` (nuevos).
-- `database/seeders/SpacesTableSeeder.php` (nuevo); `DatabaseSeeder.php` lo invoca.
-- `tests/Feature/SpaceBookingModelTest.php` (nuevo, 6 tests).
-- `.ai/tasks/modelo-espacios-reservas/execution-plan.md` — pasos 1-5 marcados.
+1. Se implementaron los Pasos 2-5 del `execution-plan.md`: modelos
+   `Space`/`Booking`, relación `bookings()` en `User` + `role` en
+   `$fillable`, detección de colisiones horarias (`Booking::scopeOverlapping()`,
+   `Space::isAvailable()`), factories, `SpacesTableSeeder` y
+   `tests/Feature/SpaceBookingModelTest.php` (6 tests).
+2. Validado con Sail (no hay `php` en el host): `migrate --force`,
+   `artisan test` (8/8 passed), `db:seed --force`, `tools/continuum doctor`
+   (0 problemas). La tarea se cerró con `continuum task close
+   modelo-espacios-reservas` → `.ai/tasks/_closed/modelo-espacios-reservas/`.
+3. Se resolvieron 3 hallazgos de higiene del repo: `compose.yaml` vs
+   `docker-compose.yml` duplicados (se eliminó el segundo), archivo suelto
+   `agenda_escenarios` (SQLite untracked sin referencias, eliminado), y el
+   commit inicial faltante del proyecto Laravel completo.
+4. Se hicieron 2 commits: `b75bd1b` (scaffold Laravel + modelo de datos) y
+   `e90aaf8` (memoria/handoff de Continuum + destrackeo de
+   `tools/_continuum/__pycache__/*.pyc`, que ya estaban en `.gitignore`
+   pero seguían en el índice de antes).
 
-**Decisión tomada:** la detección de colisiones vive en un único lugar,
-`Booking::scopeOverlapping()` (`start_time < end AND end_time > start`,
-excluye `status = cancelada`); `Space::isAvailable()` delega en ese scope
-para no duplicar la regla de oro descrita en `arquitectura.md`.
-
-**Fuera de alcance deliberadamente:** no se implementó la validación de
-aforo (`capacity`) ni la ventana de anticipación (2h-15 días) — son
-invariantes de `arquitectura.md` pero no estaban en el `task.md` de esta
-tarea (solo modelo de datos + colisión horaria). Quedan para la tarea que
-cubra validación de formularios/UI.
-
-**Validación ejecutada:** `sail artisan migrate --force` OK · `sail artisan
-test` 8/8 passed (suite completa, incluye los 6 tests nuevos) · `sail
-artisan db:seed --force` OK (10 spaces creados) · `tools/continuum doctor`
-sin problemas ni advertencias.
-
-**Validación pendiente:** no se corrió linter de estilo (Pint); no se cerró
-la tarea con `continuum task close` (no se pidió explícitamente esta sesión).
+**Estado al cerrar:** `git status` limpio (solo queda el propio archivo de
+handoff recién archivado, que es esperado). Sail sigue corriendo
+(`prueba_continuum-laravel.test-1`, `prueba_continuum-mysql-1` en
+`APP_PORT=8090`) por si se retoma trabajo pronto; no se detuvo porque en
+esta máquina es la convención dejar los stacks de Sail arriba entre
+sesiones (hay varios otros proyectos con el mismo patrón).
 
 ## Siguiente paso recomendado
-1. ~~Decidir compose.yaml vs docker-compose.yml duplicados~~ — **Resuelto
-   2026-09-11**: eran archivos idénticos; se eliminó `docker-compose.yml` y
-   se conservó `compose.yaml` (nombre moderno, además ya era el que Sail
-   elegía por precedencia). Verificado con `sail artisan --version` sin
-   warning de ambigüedad.
-2. ~~Archivo suelto `agenda_escenarios`~~ — **Resuelto 2026-09-11**: era un
-   SQLite untracked sin ninguna referencia en el código (`.env.example`
-   usa ese nombre solo como `DB_DATABASE` de MySQL, no como ruta de
-   archivo); se eliminó.
-3. La tarea `modelo-espacios-reservas` ya se cerró
-   (`.ai/tasks/_closed/modelo-espacios-reservas`). El siguiente trabajo
-   natural es la UI Livewire (`ScheduleCalendar`, `CreateBookingModal`,
-   incluyendo validación de aforo y ventana de anticipación que quedaron
-   fuera de esa tarea).
-4. El proyecto Laravel completo sigue sin su commit inicial en git (todo
-   aparece `??` en `git status`) — confirmar con el equipo si eso es
-   intencional antes de seguir acumulando cambios sin trackear.
+No hay tareas abiertas ni pendientes de higiene. El trabajo natural
+siguiente es la UI Livewire explícitamente fuera de alcance de
+`modelo-espacios-reservas`:
+
+- `App\Livewire\Bookings\ScheduleCalendar` (cuadrícula de disponibilidad).
+- `App\Livewire\Bookings\CreateBookingModal` (formulario con validación de
+  traslape en tiempo real, aforo vs `Space.capacity`, y ventana de
+  anticipación 2h-15 días — estas dos últimas reglas de negocio quedaron
+  sin implementar, ver `.ai/tasks/_closed/modelo-espacios-reservas/handoff.md`).
+
+Antes de empezar, crear la tarea con `tools/continuum task start
+<slug> --size medium` (o `large` si se decide dividir calendario y modal en
+subtareas) y leer `.ai/state/topics/arquitectura.md` para el patrón
+Livewire/Alpine ya documentado.
