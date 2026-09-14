@@ -9,8 +9,14 @@ Solicitudes (aprobar/rechazar, marcar terminado/cancelar) — ver
 `.ai/tasks/_closed/SolicitudUso/` y `.ai/tasks/_closed/GestionSolicitudes/`.
 Hay una página de inicio (`/`) con navegación entre las cuatro vistas.
 `events.requester_id` ya vincula la solicitud con el usuario que la creó
-(nullable, ver `.ai/tasks/_closed/SolicitanteEvent/`). Ninguna vista tiene
-control de acceso todavía (depende de Autenticación Federada, pendiente).
+(nullable, ver `.ai/tasks/_closed/SolicitanteEvent/`). Autenticación
+Federada (SimpleSAML) implementada con simulador vía `.env`, replicando el
+patrón de `../redi/redi-app` (ver `.ai/tasks/_closed/AutenticacionFederada/`);
+`/solicitudes/nueva` y `/solicitudes` ya requieren login, catálogo/calendario/
+inicio siguen públicos. El flujo SAML real contra el IdP de DGRE queda
+wireado pero sin validar (el `entityId` de esta app aún no está registrado
+con el IdP). Todavía no hay control de acceso por rol/escenario: cualquier
+usuario logueado puede gestionar cualquier solicitud.
 
 ## Stack
     - **Backend:** Laravel 11.x (PHP 8.2+)
@@ -38,8 +44,10 @@ control de acceso todavía (depende de Autenticación Federada, pendiente).
 7. Responsividad y Accesibilidad (iterativo).
 
 ## Próximos pasos
-- Autenticación Federada (SimpleSAML) — prioridad 3, y con ella agregar
-  control de acceso a las vistas existentes.
+- Administración de Usuarios y Roles (prioridad 4): control de acceso por
+  rol/escenario en `RequestManager`, hoy inexistente.
+- Registrar el `entityId` de esta app con el administrador del IdP de DGRE
+  para poder probar el flujo SAML real (`SAML_SIMULATOR=false`).
 - Notificaciones por correo al solicitante (ya desbloqueadas por
   `events.requester_id`, pendientes de implementar).
 - Establecer sprints de 2 semanas y estimar effort.
