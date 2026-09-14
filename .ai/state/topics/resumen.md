@@ -26,9 +26,11 @@ coordinador`. El frontend usa Bootstrap 5 + Sass (no Tailwind, ver
 móvil) y pasa una auditoría automatizada de accesibilidad WCAG 2.1 A/AA
 con axe-core (`npm run test:a11y`, ver
 `.ai/tasks/_closed/ResponsividadAccesibilidad/`). CI configurado en
-`.github/workflows/tests.yml` (PHPUnit en cada PR/push), sin validar
-todavía end-to-end porque el repositorio no tiene remoto propio en
-GitHub (ver `.ai/tasks/_closed/ConfiguracionCI/`). Identidad visual
+`.github/workflows/tests.yml` (PHPUnit en cada PR/push) y
+`continuum-doctor.yml`, ambos validados corriendo de verdad en
+`https://github.com/fabian8all/agenda_continuum` (privado, remoto
+`origin`) — el primer push disparó ambos workflows y terminaron en verde
+(ver `.ai/tasks/_closed/ConfiguracionCI/`). Identidad visual
 institucional aplicada: `$primary` verde `#4c8300` (mismo color que
 `../redi/redi-app`, otro proyecto de DGRE) y tipografía Source Sans 3,
 sin usar ningún logo ajeno (ver `.ai/tasks/_closed/DisenoVisual/`).
@@ -59,9 +61,6 @@ sin usar ningún logo ajeno (ver `.ai/tasks/_closed/DisenoVisual/`).
 7. Responsividad y Accesibilidad (iterativo).
 
 ## Próximos pasos
-- Crear el remoto de GitHub de este proyecto y hacer el primer push, para
-  validar de verdad `.github/workflows/tests.yml` y `continuum-doctor.yml`
-  (por ahora solo se simularon localmente).
 - Revisar si falta algo explícito de "Acceso Público" (prioridad 5) — en
   la práctica ya está satisfecho (catálogo/calendario/inicio públicos).
 - Registrar el `entityId` de esta app con el administrador del IdP de DGRE
@@ -69,6 +68,8 @@ sin usar ningún logo ajeno (ver `.ai/tasks/_closed/DisenoVisual/`).
 - Notificaciones por correo al solicitante (ya desbloqueadas por
   `events.requester_id`, pendientes de implementar).
 - Establecer sprints de 2 semanas y estimar effort.
+- Configurar protección de rama en GitHub para `master` (ya hay dos
+  checks de CI en verde que podrían exigirse como bloqueantes de PR).
 
 ## Comandos frecuentes
 
