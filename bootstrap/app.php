@@ -11,7 +11,14 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'verify.auth' => \App\Http\Middleware\VerifyAuthSaml::class,
+        ]);
+
+        // El IdP hace un POST sin token CSRF al Assertion Consumer Service.
+        $middleware->validateCsrfTokens(except: [
+            'saml2/*/acs',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

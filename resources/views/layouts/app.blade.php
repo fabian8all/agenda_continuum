@@ -15,6 +15,15 @@
                 <a href="{{ route('calendario.index') }}" class="text-sm text-gray-600 hover:text-gray-900">Calendario</a>
                 <a href="{{ route('solicitudes.crear') }}" class="text-sm text-gray-600 hover:text-gray-900">Nueva solicitud</a>
                 <a href="{{ route('solicitudes.gestion') }}" class="text-sm text-gray-600 hover:text-gray-900">Gestión de solicitudes</a>
+
+                <span class="ml-auto text-sm">
+                    @auth
+                        <span class="text-gray-600">{{ auth()->user()->name }}</span>
+                        <a href="{{ route('logout') }}" class="ml-3 text-gray-600 hover:text-gray-900">Cerrar sesión</a>
+                    @else
+                        <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-900">Iniciar sesión</a>
+                    @endauth
+                </span>
             </div>
         </nav>
 

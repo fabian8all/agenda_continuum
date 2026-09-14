@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,10 +15,13 @@ Route::get('/calendario', function () {
     return view('calendario.index');
 })->name('calendario.index');
 
+Route::get('/login', [AuthController::class, 'login'])->middleware('verify.auth')->name('login');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
 Route::get('/solicitudes/nueva', function () {
     return view('solicitudes.nueva');
-})->name('solicitudes.crear');
+})->middleware('verify.auth')->name('solicitudes.crear');
 
 Route::get('/solicitudes', function () {
     return view('solicitudes.gestion');
-})->name('solicitudes.gestion');
+})->middleware('verify.auth')->name('solicitudes.gestion');
