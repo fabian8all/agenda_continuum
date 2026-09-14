@@ -4,15 +4,18 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>@yield('title', 'Agenda de Escenarios')</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
         @livewireStyles
     </head>
     <body class="bg-light">
         <a href="#main-content" class="visually-hidden-focusable">Saltar al contenido principal</a>
 
-        <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom" aria-label="Principal">
+        <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom border-primary border-3" aria-label="Principal">
             <div class="container">
-                <a href="{{ route('home') }}" class="navbar-brand fw-semibold">Agenda de Escenarios</a>
+                <a href="{{ route('home') }}" class="navbar-brand fw-bold text-primary">Agenda de Escenarios</a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Abrir menú de navegación">
                     <span class="navbar-toggler-icon"></span>

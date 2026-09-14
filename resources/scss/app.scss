@@ -11,4 +11,36 @@
 // tests/accessibility/. $gray-700 sí cumple.
 $secondary: #495057;
 
+// Identidad institucional: mismo verde (--main-color) que ya usa
+// ../redi/redi-app, otro proyecto de DGRE — reutiliza un color ya
+// establecido en el ecosistema en vez de inventar uno nuevo. Contraste de
+// texto blanco sobre este verde verificado ≈4.6:1 (cumple AA) con
+// tests/accessibility/.
+$primary: #4c8300;
+
+// Misma familia tipográfica que usa `redi` (cargada como Google Font en
+// el layout — "Source Sans Pro" pasó a llamarse "Source Sans 3" en
+// Google Fonts); se conserva su mismo stack de fallback.
+$font-family-sans-serif: 'Source Sans 3', 'IBM Plex Sans', Helvetica, 'Segoe UI', Arial, sans-serif;
+
 @import "bootstrap/scss/bootstrap";
+
+// El enlace activo/hover del navbar usa las variables CSS de Bootstrap
+// 5.3 pensadas para esto, en vez del gris oscuro por defecto.
+.navbar-light {
+    --bs-navbar-active-color: #{$primary};
+    --bs-navbar-hover-color: #{$primary};
+}
+
+// Tarjetas de navegación de la página de inicio y del catálogo de
+// escenarios: una elevación sutil al pasar el cursor/enfocar, en vez de
+// quedarse planas como el .card por defecto de Bootstrap.
+.home-card {
+    transition: box-shadow .15s ease-in-out, transform .15s ease-in-out;
+
+    &:hover,
+    &:focus-visible {
+        box-shadow: $box-shadow;
+        transform: translateY(-2px);
+    }
+}
