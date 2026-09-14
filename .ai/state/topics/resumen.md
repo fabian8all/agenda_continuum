@@ -28,7 +28,10 @@ con axe-core (`npm run test:a11y`, ver
 `.ai/tasks/_closed/ResponsividadAccesibilidad/`). CI configurado en
 `.github/workflows/tests.yml` (PHPUnit en cada PR/push), sin validar
 todavía end-to-end porque el repositorio no tiene remoto propio en
-GitHub (ver `.ai/tasks/_closed/ConfiguracionCI/`).
+GitHub (ver `.ai/tasks/_closed/ConfiguracionCI/`). Identidad visual
+institucional aplicada: `$primary` verde `#4c8300` (mismo color que
+`../redi/redi-app`, otro proyecto de DGRE) y tipografía Source Sans 3,
+sin usar ningún logo ajeno (ver `.ai/tasks/_closed/DisenoVisual/`).
 
 ## Stack
     - **Backend:** Laravel 11.x (PHP 8.2+)
