@@ -16,11 +16,14 @@ patrón de `../redi/redi-app` (ver `.ai/tasks/_closed/AutenticacionFederada/`);
 inicio siguen públicos. El flujo SAML real contra el IdP de DGRE queda
 wireado pero sin validar (el `entityId` de esta app aún no está registrado
 con el IdP). Todavía no hay control de acceso por rol/escenario: cualquier
-usuario logueado puede gestionar cualquier solicitud.
+usuario logueado puede gestionar cualquier solicitud. El frontend se migró
+de Tailwind a Bootstrap 5 + Sass (ver `.ai/tasks/_closed/MigrarBootstrap/`);
+el ambiente de desarrollo local usa `docker-compose.yml` +
+`docker-compose.override.yml` (ver `.ai/tasks/_closed/DockerComposeSplit/`).
 
 ## Stack
     - **Backend:** Laravel 11.x (PHP 8.2+)
-    - **Reactividad y Frontend:** Laravel Livewire v3 + Alpine.js + Tailwind CSS
+    - **Reactividad y Frontend:** Laravel Livewire v3 + Alpine.js + Bootstrap 5 (Sass) — no se usa Tailwind (ver `docs/requirements.md`)
     - **Base de datos:** MySQL 8.x (Eloquent ORM)
     - **Tests:** Pest PHP / PHPUnit
 

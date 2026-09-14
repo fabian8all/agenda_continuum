@@ -74,7 +74,7 @@
 - **Usuarios**: Modelo `User` con roles (spatie/laravel-permission), integración SimpleSAMLphp, UI admin.
 - **Público**: Rutas públicas, middleware de solo‑lectura.
 - **Auditoría**: Tabla `audit_logs`, listener de eventos, UI de consulta.
-- **Responsividad**: Utilizar Tailwind utilities, pruebas en dispositivos.
+- **Responsividad**: Utilizar el grid y las utilidades de Bootstrap, pruebas en dispositivos.
 - **Accesibilidad**: Auditar con axe, añadir atributos ARIA, colores contrastados.
 
 ## Prioridad (MVP → Release)

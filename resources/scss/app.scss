@@ -1,0 +1,6 @@
+// Bootstrap 5 — única hoja de estilos de la aplicación.
+// La carga resources/views/layouts/app.blade.php (todas las páginas usan
+// ese layout). Este proyecto no usa Tailwind (ver docs/requirements.md,
+// restricciones tecnológicas).
+
+@import "bootstrap/scss/bootstrap";
