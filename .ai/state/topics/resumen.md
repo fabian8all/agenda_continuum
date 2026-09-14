@@ -2,12 +2,15 @@
 
 Sistema web institucional para la reserva y gestión de escenarios educativos (aulas, laboratorios, talleres y auditorios). Permite a los profesores consultar disponibilidad horaria en tiempo real y solicitar reservas de aulas según capacidad y equipamiento requerido, previniendo el solapamiento de horarios.
 
-**Estado actual:** Modelo de datos (`Scenario`, `Event`) y la primera épica
-del MVP completos: Catálogo de Escenarios, Calendario de Eventos y
-Solicitud de Uso (formulario con validación de disponibilidad, sin
-solapamientos) — ver `.ai/tasks/_closed/SolicitudUso/`. Hay una página de
-inicio (`/`) con navegación mínima entre las tres vistas. Pendiente: Gestión
-de Solicitudes (aprobación/rechazo).
+**Estado actual:** Modelo de datos (`Scenario`, `Event`) y las dos primeras
+épicas del MVP completas: Catálogo de Escenarios, Calendario de Eventos,
+Solicitud de Uso (con validación de disponibilidad) y Gestión de
+Solicitudes (aprobar/rechazar, marcar terminado/cancelar) — ver
+`.ai/tasks/_closed/SolicitudUso/` y `.ai/tasks/_closed/GestionSolicitudes/`.
+Hay una página de inicio (`/`) con navegación entre las cuatro vistas.
+Ninguna vista tiene control de acceso todavía (depende de Autenticación
+Federada, pendiente); `events` tampoco registra al usuario solicitante, lo
+que bloquea notificaciones por correo hasta que se agregue esa relación.
 
 ## Stack
     - **Backend:** Laravel 11.x (PHP 8.2+)
@@ -35,8 +38,10 @@ de Solicitudes (aprobación/rechazo).
 7. Responsividad y Accesibilidad (iterativo).
 
 ## Próximos pasos
-- Implementar Gestión de Solicitudes (aprobar/rechazar, notificaciones,
-  cierre/cancelación).
+- Autenticación Federada (SimpleSAML) — prioridad 3, y con ella agregar
+  control de acceso a las vistas existentes.
+- Agregar la relación solicitante ↔ `Event` (gap detectado en
+  `GestionSolicitudes`), necesaria antes de notificaciones por correo.
 - Establecer sprints de 2 semanas y estimar effort.
 - Configurar CI (las pruebas automatizadas con Pest/PHPUnit ya existen).
 
