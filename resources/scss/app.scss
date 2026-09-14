@@ -3,4 +3,12 @@
 // ese layout). Este proyecto no usa Tailwind (ver docs/requirements.md,
 // restricciones tecnológicas).
 
+@import "bootstrap/scss/functions";
+
+// El $secondary por defecto de Bootstrap ($gray-600, #6c757d) no cumple el
+// contraste mínimo 4.5:1 de WCAG 2.1 AA sobre los fondos claros que usa
+// esta app (bg-light/bg-white) — auditado con axe-core, ver
+// tests/accessibility/. $gray-700 sí cumple.
+$secondary: #495057;
+
 @import "bootstrap/scss/bootstrap";

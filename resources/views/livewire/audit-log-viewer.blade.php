@@ -1,5 +1,5 @@
 <div>
-    <div class="d-flex align-items-center justify-content-between mb-4">
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-4">
         <h1 class="h4 fw-semibold mb-0">Auditoría y Registro</h1>
         <a href="{{ $this->exportUrl() }}" class="btn btn-outline-secondary btn-sm">Exportar CSV</a>
     </div>
@@ -28,11 +28,11 @@
         <table class="table table-bordered bg-white align-middle">
             <thead>
                 <tr>
-                    <th>Fecha</th>
-                    <th>Acción</th>
-                    <th>Escenario</th>
-                    <th>Usuario</th>
-                    <th>Descripción</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Acción</th>
+                    <th scope="col">Escenario</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Descripción</th>
                 </tr>
             </thead>
             <tbody>

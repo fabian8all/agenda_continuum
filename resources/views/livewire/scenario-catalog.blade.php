@@ -1,8 +1,8 @@
 <div>
     <h1 class="h4 fw-semibold mb-4">Catálogo de Escenarios</h1>
-    <div class="list-group">
+    <ul class="list-group">
         @foreach($scenarios as $scenario)
-            <div class="list-group-item">
+            <li class="list-group-item">
                 <strong>{{ $scenario->name }}</strong> – Capacidad: {{ $scenario->capacity }}
                 @if($scenario->admin)
                     <br>Administrador: {{ $scenario->admin->name }}
@@ -10,7 +10,7 @@
                 @if($scenario->resources)
                     <br>Recursos: {{ implode(', ', array_keys(array_filter($scenario->resources))) }}
                 @endif
-            </div>
+            </li>
         @endforeach
-    </div>
+    </ul>
 </div>
