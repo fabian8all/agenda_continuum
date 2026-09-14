@@ -2,24 +2,24 @@
 
 Sistema web institucional para la reserva y gestión de escenarios educativos (aulas, laboratorios, talleres y auditorios). Permite a los profesores consultar disponibilidad horaria en tiempo real y solicitar reservas de aulas según capacidad y equipamiento requerido, previniendo el solapamiento de horarios.
 
-**Estado actual:** Modelo de datos (`Scenario`, `Event`) y las dos primeras
-épicas del MVP completas: Catálogo de Escenarios, Calendario de Eventos,
-Solicitud de Uso (con validación de disponibilidad) y Gestión de
-Solicitudes (aprobar/rechazar, marcar terminado/cancelar) — ver
-`.ai/tasks/_closed/SolicitudUso/` y `.ai/tasks/_closed/GestionSolicitudes/`.
-Hay una página de inicio (`/`) con navegación entre las cuatro vistas.
-`events.requester_id` ya vincula la solicitud con el usuario que la creó
-(nullable, ver `.ai/tasks/_closed/SolicitanteEvent/`). Autenticación
-Federada (SimpleSAML) implementada con simulador vía `.env`, replicando el
-patrón de `../redi/redi-app` (ver `.ai/tasks/_closed/AutenticacionFederada/`);
-`/solicitudes/nueva` y `/solicitudes` ya requieren login, catálogo/calendario/
-inicio siguen públicos. El flujo SAML real contra el IdP de DGRE queda
-wireado pero sin validar (el `entityId` de esta app aún no está registrado
-con el IdP). Todavía no hay control de acceso por rol/escenario: cualquier
-usuario logueado puede gestionar cualquier solicitud. El frontend se migró
-de Tailwind a Bootstrap 5 + Sass (ver `.ai/tasks/_closed/MigrarBootstrap/`);
-el ambiente de desarrollo local usa `docker-compose.yml` +
-`docker-compose.override.yml` (ver `.ai/tasks/_closed/DockerComposeSplit/`).
+**Estado actual:** Las 4 épicas fundamentales del MVP están completas:
+Catálogo de Escenarios, Calendario de Eventos, Solicitud de Uso (con
+validación de disponibilidad), Gestión de Solicitudes (aprobar/rechazar,
+marcar terminado/cancelar), Autenticación Federada (SimpleSAML con
+simulador) y Administración de Usuarios y Roles — ver
+`.ai/tasks/_closed/`. `events.requester_id` vincula cada solicitud con su
+autor. Control de acceso por rol ya implementado: `docente` (Solicitante)
+solo crea solicitudes; `admin` (Administrador de Escenario) solo
+gestiona/cierra eventos de sus escenarios asignados
+(`scenarios.admin_id`); `coordinador` (Administrador General) tiene
+acceso total, incluida la administración de usuarios en
+`/administracion/usuarios`. Catálogo, calendario e inicio siguen
+públicos. El flujo SAML real contra el IdP de DGRE queda wireado pero sin
+validar (el `entityId` de esta app aún no está registrado con el IdP); el
+primer `coordinador` se crea con `php artisan users:set-role {email}
+coordinador`. El frontend usa Bootstrap 5 + Sass (no Tailwind, ver
+`docs/requirements.md`); el ambiente local usa `docker-compose.yml` +
+`docker-compose.override.yml`.
 
 ## Stack
     - **Backend:** Laravel 11.x (PHP 8.2+)
@@ -47,8 +47,10 @@ el ambiente de desarrollo local usa `docker-compose.yml` +
 7. Responsividad y Accesibilidad (iterativo).
 
 ## Próximos pasos
-- Administración de Usuarios y Roles (prioridad 4): control de acceso por
-  rol/escenario en `RequestManager`, hoy inexistente.
+- Revisar si falta algo explícito de "Acceso Público" (prioridad 5) — en
+  la práctica ya está satisfecho (catálogo/calendario/inicio públicos).
+- Auditoría y Registro (prioridad 6): tabla `audit_logs`, listener de
+  eventos, UI de consulta filtrable y exportable a CSV.
 - Registrar el `entityId` de esta app con el administrador del IdP de DGRE
   para poder probar el flujo SAML real (`SAML_SIMULATOR=false`).
 - Notificaciones por correo al solicitante (ya desbloqueadas por
@@ -62,3 +64,4 @@ el ambiente de desarrollo local usa `docker-compose.yml` +
     - Migraciones y seeders: `php artisan migrate:fresh --seed`
     - Pruebas automatizadas: `php artisan test` (o `./vendor/bin/pest`)
     - Diagnóstico Continuum: `tools/continuum doctor`
+    - Promover al primer administrador general: `php artisan users:set-role <email> coordinador`
