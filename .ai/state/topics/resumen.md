@@ -25,7 +25,10 @@ coordinador`. El frontend usa Bootstrap 5 + Sass (no Tailwind, ver
 `docker-compose.override.yml`. La UI es responsiva (navbar colapsable en
 móvil) y pasa una auditoría automatizada de accesibilidad WCAG 2.1 A/AA
 con axe-core (`npm run test:a11y`, ver
-`.ai/tasks/_closed/ResponsividadAccesibilidad/`).
+`.ai/tasks/_closed/ResponsividadAccesibilidad/`). CI configurado en
+`.github/workflows/tests.yml` (PHPUnit en cada PR/push), sin validar
+todavía end-to-end porque el repositorio no tiene remoto propio en
+GitHub (ver `.ai/tasks/_closed/ConfiguracionCI/`).
 
 ## Stack
     - **Backend:** Laravel 11.x (PHP 8.2+)
@@ -53,6 +56,9 @@ con axe-core (`npm run test:a11y`, ver
 7. Responsividad y Accesibilidad (iterativo).
 
 ## Próximos pasos
+- Crear el remoto de GitHub de este proyecto y hacer el primer push, para
+  validar de verdad `.github/workflows/tests.yml` y `continuum-doctor.yml`
+  (por ahora solo se simularon localmente).
 - Revisar si falta algo explícito de "Acceso Público" (prioridad 5) — en
   la práctica ya está satisfecho (catálogo/calendario/inicio públicos).
 - Registrar el `entityId` de esta app con el administrador del IdP de DGRE
@@ -60,7 +66,6 @@ con axe-core (`npm run test:a11y`, ver
 - Notificaciones por correo al solicitante (ya desbloqueadas por
   `events.requester_id`, pendientes de implementar).
 - Establecer sprints de 2 semanas y estimar effort.
-- Configurar CI (las pruebas automatizadas con Pest/PHPUnit ya existen).
 
 ## Comandos frecuentes
 
