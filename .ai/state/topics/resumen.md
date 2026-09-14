@@ -8,9 +8,9 @@ Solicitud de Uso (con validación de disponibilidad) y Gestión de
 Solicitudes (aprobar/rechazar, marcar terminado/cancelar) — ver
 `.ai/tasks/_closed/SolicitudUso/` y `.ai/tasks/_closed/GestionSolicitudes/`.
 Hay una página de inicio (`/`) con navegación entre las cuatro vistas.
-Ninguna vista tiene control de acceso todavía (depende de Autenticación
-Federada, pendiente); `events` tampoco registra al usuario solicitante, lo
-que bloquea notificaciones por correo hasta que se agregue esa relación.
+`events.requester_id` ya vincula la solicitud con el usuario que la creó
+(nullable, ver `.ai/tasks/_closed/SolicitanteEvent/`). Ninguna vista tiene
+control de acceso todavía (depende de Autenticación Federada, pendiente).
 
 ## Stack
     - **Backend:** Laravel 11.x (PHP 8.2+)
@@ -40,8 +40,8 @@ que bloquea notificaciones por correo hasta que se agregue esa relación.
 ## Próximos pasos
 - Autenticación Federada (SimpleSAML) — prioridad 3, y con ella agregar
   control de acceso a las vistas existentes.
-- Agregar la relación solicitante ↔ `Event` (gap detectado en
-  `GestionSolicitudes`), necesaria antes de notificaciones por correo.
+- Notificaciones por correo al solicitante (ya desbloqueadas por
+  `events.requester_id`, pendientes de implementar).
 - Establecer sprints de 2 semanas y estimar effort.
 - Configurar CI (las pruebas automatizadas con Pest/PHPUnit ya existen).
 
