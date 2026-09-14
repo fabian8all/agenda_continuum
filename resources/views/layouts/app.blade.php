@@ -22,6 +22,7 @@
                         @endif
                         @if (auth()->user()->role === 'coordinador')
                             <a href="{{ route('administracion.usuarios') }}" class="nav-link p-0 text-secondary">Administración</a>
+                            <a href="{{ route('administracion.auditoria') }}" class="nav-link p-0 text-secondary">Auditoría</a>
                         @endif
                     @endauth
                 </div>

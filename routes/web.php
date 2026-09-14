@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuditLogExportController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,11 @@ Route::get('/solicitudes', function () {
 Route::get('/administracion/usuarios', function () {
     return view('administracion.usuarios');
 })->middleware(['verify.auth', 'role:coordinador'])->name('administracion.usuarios');
+
+Route::get('/administracion/auditoria', function () {
+    return view('administracion.auditoria');
+})->middleware(['verify.auth', 'role:coordinador'])->name('administracion.auditoria');
+
+Route::get('/administracion/auditoria/exportar', AuditLogExportController::class)
+    ->middleware(['verify.auth', 'role:coordinador'])
+    ->name('auditoria.exportar');
