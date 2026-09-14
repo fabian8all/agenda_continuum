@@ -11,6 +11,7 @@ class Event extends Model
 
     protected $fillable = [
         'scenario_id',
+        'requester_id',
         'start_time',
         'end_time',
         'status',
@@ -26,5 +27,10 @@ class Event extends Model
     public function scenario()
     {
         return $this->belongsTo(Scenario::class);
+    }
+
+    public function requester()
+    {
+        return $this->belongsTo(User::class, 'requester_id');
     }
 }

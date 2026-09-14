@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Booking::class);
     }
+
+    public function eventRequests(): HasMany
+    {
+        return $this->hasMany(Event::class, 'requester_id');
+    }
 }

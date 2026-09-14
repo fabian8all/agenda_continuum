@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Http\Livewire\ReservationForm;
 use App\Models\Event;
 use App\Models\Scenario;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Livewire\Livewire;
@@ -34,6 +35,42 @@ class ReservationFormTest extends TestCase
             'status' => 'pending',
             'description' => 'Clase de laboratorio',
         ]);
+    }
+
+    public function test_it_records_the_authenticated_user_as_the_requester(): void
+    {
+        $user = User::factory()->create();
+        $scenario = Scenario::factory()->create();
+        $start = Carbon::now()->addDay()->setTime(10, 0);
+        $end = $start->copy()->addHours(2);
+
+        Livewire::actingAs($user)
+            ->test(ReservationForm::class)
+            ->set('scenario_id', $scenario->id)
+            ->set('start_time', $start->format('Y-m-d\TH:i'))
+            ->set('end_time', $end->format('Y-m-d\TH:i'))
+            ->call('submit')
+            ->assertHasNoErrors();
+
+        $event = Event::firstOrFail();
+        $this->assertTrue($event->requester->is($user));
+        $this->assertTrue($user->eventRequests->contains($event));
+    }
+
+    public function test_it_leaves_the_requester_blank_for_an_unauthenticated_submission(): void
+    {
+        $scenario = Scenario::factory()->create();
+        $start = Carbon::now()->addDay()->setTime(10, 0);
+        $end = $start->copy()->addHours(2);
+
+        Livewire::test(ReservationForm::class)
+            ->set('scenario_id', $scenario->id)
+            ->set('start_time', $start->format('Y-m-d\TH:i'))
+            ->set('end_time', $end->format('Y-m-d\TH:i'))
+            ->call('submit')
+            ->assertHasNoErrors();
+
+        $this->assertNull(Event::firstOrFail()->requester_id);
     }
 
     public function test_the_form_resets_after_a_successful_submission(): void

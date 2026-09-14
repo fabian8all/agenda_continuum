@@ -53,6 +53,7 @@ class ReservationForm extends Component
 
         Event::create([
             'scenario_id' => $validated['scenario_id'],
+            'requester_id' => auth()->id(),
             'start_time' => $validated['start_time'],
             'end_time' => $validated['end_time'],
             'description' => $validated['description'],
