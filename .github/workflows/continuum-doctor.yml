@@ -8,7 +8,10 @@ name: continuum-doctor
 on:
   pull_request:
   push:
-    branches: [main]
+    # Este repositorio aún no tiene remoto propio en GitHub y su rama
+    # local actual es `master`; se incluye `main` también por si el
+    # remoto que se cree usa ese nombre por defecto.
+    branches: [main, master]
 
 jobs:
   doctor:
