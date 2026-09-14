@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Event::class, 'requester_id');
     }
+
+    public function administeredScenarios(): HasMany
+    {
+        return $this->hasMany(Scenario::class, 'admin_id');
+    }
 }

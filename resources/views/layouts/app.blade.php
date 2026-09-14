@@ -16,7 +16,14 @@
                     <a href="{{ route('escenarios.index') }}" class="nav-link p-0 text-secondary">Escenarios</a>
                     <a href="{{ route('calendario.index') }}" class="nav-link p-0 text-secondary">Calendario</a>
                     <a href="{{ route('solicitudes.crear') }}" class="nav-link p-0 text-secondary">Nueva solicitud</a>
-                    <a href="{{ route('solicitudes.gestion') }}" class="nav-link p-0 text-secondary">Gestión de solicitudes</a>
+                    @auth
+                        @if (in_array(auth()->user()->role, ['admin', 'coordinador'], true))
+                            <a href="{{ route('solicitudes.gestion') }}" class="nav-link p-0 text-secondary">Gestión de solicitudes</a>
+                        @endif
+                        @if (auth()->user()->role === 'coordinador')
+                            <a href="{{ route('administracion.usuarios') }}" class="nav-link p-0 text-secondary">Administración</a>
+                        @endif
+                    @endauth
                 </div>
 
                 <div class="ms-md-auto small">

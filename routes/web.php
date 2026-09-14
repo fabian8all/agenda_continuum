@@ -24,4 +24,8 @@ Route::get('/solicitudes/nueva', function () {
 
 Route::get('/solicitudes', function () {
     return view('solicitudes.gestion');
-})->middleware('verify.auth')->name('solicitudes.gestion');
+})->middleware(['verify.auth', 'role:admin,coordinador'])->name('solicitudes.gestion');
+
+Route::get('/administracion/usuarios', function () {
+    return view('administracion.usuarios');
+})->middleware(['verify.auth', 'role:coordinador'])->name('administracion.usuarios');

@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Http\Livewire\RequestManager;
 use App\Models\Event;
 use App\Models\Scenario;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Livewire\Livewire;
@@ -13,6 +14,16 @@ use Tests\TestCase;
 class RequestManagerTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // 'coordinador' (Administrador General) ve todos los escenarios;
+        // el filtrado por escenario de 'admin' se cubre en
+        // RequestManagerRoleTest.
+        $this->actingAs(User::factory()->create(['role' => 'coordinador']));
+    }
 
     public function test_it_lists_pending_events(): void
     {

@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'verify.auth' => \App\Http\Middleware\VerifyAuthSaml::class,
+            'role' => \App\Http\Middleware\EnsureRole::class,
         ]);
 
         // El IdP hace un POST sin token CSRF al Assertion Consumer Service.

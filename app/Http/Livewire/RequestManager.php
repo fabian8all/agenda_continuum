@@ -19,18 +19,24 @@ class RequestManager extends Component
         $this->refreshLists();
     }
 
+    protected function scopeToOwnScenarios($query)
+    {
+        if (auth()->user()->role === 'admin') {
+            $query->whereHas('scenario', fn ($q) => $q->where('admin_id', auth()->id()));
+        }
+
+        return $query;
+    }
+
     protected function refreshLists()
     {
-        $this->pendingEvents = Event::with('scenario')
-            ->where('status', 'pending')
-            ->orderBy('start_time')
-            ->get();
+        $this->pendingEvents = $this->scopeToOwnScenarios(
+            Event::with('scenario')->where('status', 'pending')
+        )->orderBy('start_time')->get();
 
-        $this->closableEvents = Event::with('scenario')
-            ->where('status', 'approved')
-            ->where('end_time', '<', Carbon::now())
-            ->orderBy('start_time')
-            ->get();
+        $this->closableEvents = $this->scopeToOwnScenarios(
+            Event::with('scenario')->where('status', 'approved')->where('end_time', '<', Carbon::now())
+        )->orderBy('start_time')->get();
     }
 
     public function approve(int $eventId)
@@ -70,7 +76,7 @@ class RequestManager extends Component
         $this->successMessage = '';
         $this->errorMessage = '';
 
-        $event = Event::find($eventId);
+        $event = $this->scopeToOwnScenarios(Event::with('scenario')->where('id', $eventId))->first();
 
         if (! $event || $event->status !== $from || ($requirePastEnd && $event->end_time->isFuture())) {
             $this->errorMessage = 'Esa solicitud ya no está disponible para esta acción.';
