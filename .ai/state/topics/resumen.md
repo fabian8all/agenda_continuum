@@ -2,13 +2,16 @@
 
 Sistema web institucional para la reserva y gestión de escenarios educativos (aulas, laboratorios, talleres y auditorios). Permite a los profesores consultar disponibilidad horaria en tiempo real y solicitar reservas de aulas según capacidad y equipamiento requerido, previniendo el solapamiento de horarios.
 
-**Estado actual:** Las 4 épicas fundamentales del MVP están completas:
+**Estado actual:** Las 6 épicas fundamentales del MVP están completas:
 Catálogo de Escenarios, Calendario de Eventos, Solicitud de Uso (con
 validación de disponibilidad), Gestión de Solicitudes (aprobar/rechazar,
 marcar terminado/cancelar), Autenticación Federada (SimpleSAML con
-simulador) y Administración de Usuarios y Roles — ver
-`.ai/tasks/_closed/`. `events.requester_id` vincula cada solicitud con su
-autor. Control de acceso por rol ya implementado: `docente` (Solicitante)
+simulador), Administración de Usuarios y Roles, y Auditoría y Registro —
+ver `.ai/tasks/_closed/`. `events.requester_id` vincula cada solicitud
+con su autor. Cada creación/aprobación/rechazo/cierre de un `Event` se
+registra automáticamente en `audit_logs` (vía `EventObserver`), consultable
+y exportable a CSV en `/administracion/auditoria`. Control de acceso por
+rol ya implementado: `docente` (Solicitante)
 solo crea solicitudes; `admin` (Administrador de Escenario) solo
 gestiona/cierra eventos de sus escenarios asignados
 (`scenarios.admin_id`); `coordinador` (Administrador General) tiene
@@ -49,8 +52,7 @@ coordinador`. El frontend usa Bootstrap 5 + Sass (no Tailwind, ver
 ## Próximos pasos
 - Revisar si falta algo explícito de "Acceso Público" (prioridad 5) — en
   la práctica ya está satisfecho (catálogo/calendario/inicio públicos).
-- Auditoría y Registro (prioridad 6): tabla `audit_logs`, listener de
-  eventos, UI de consulta filtrable y exportable a CSV.
+- Responsividad y Accesibilidad WCAG 2.1 AA (prioridad 7, iterativa).
 - Registrar el `entityId` de esta app con el administrador del IdP de DGRE
   para poder probar el flujo SAML real (`SAML_SIMULATOR=false`).
 - Notificaciones por correo al solicitante (ya desbloqueadas por
