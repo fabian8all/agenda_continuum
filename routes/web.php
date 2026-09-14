@@ -17,3 +17,7 @@ Route::get('/calendario', function () {
 Route::get('/solicitudes/nueva', function () {
     return view('solicitudes.nueva');
 })->name('solicitudes.crear');
+
+Route::get('/solicitudes', function () {
+    return view('solicitudes.gestion');
+})->name('solicitudes.gestion');

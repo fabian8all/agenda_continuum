@@ -14,6 +14,7 @@
                 <a href="{{ route('escenarios.index') }}" class="text-sm text-gray-600 hover:text-gray-900">Escenarios</a>
                 <a href="{{ route('calendario.index') }}" class="text-sm text-gray-600 hover:text-gray-900">Calendario</a>
                 <a href="{{ route('solicitudes.crear') }}" class="text-sm text-gray-600 hover:text-gray-900">Nueva solicitud</a>
+                <a href="{{ route('solicitudes.gestion') }}" class="text-sm text-gray-600 hover:text-gray-900">Gestión de solicitudes</a>
             </div>
         </nav>
 
