@@ -22,7 +22,10 @@ validar (el `entityId` de esta app aún no está registrado con el IdP); el
 primer `coordinador` se crea con `php artisan users:set-role {email}
 coordinador`. El frontend usa Bootstrap 5 + Sass (no Tailwind, ver
 `docs/requirements.md`); el ambiente local usa `docker-compose.yml` +
-`docker-compose.override.yml`.
+`docker-compose.override.yml`. La UI es responsiva (navbar colapsable en
+móvil) y pasa una auditoría automatizada de accesibilidad WCAG 2.1 A/AA
+con axe-core (`npm run test:a11y`, ver
+`.ai/tasks/_closed/ResponsividadAccesibilidad/`).
 
 ## Stack
     - **Backend:** Laravel 11.x (PHP 8.2+)
@@ -52,7 +55,6 @@ coordinador`. El frontend usa Bootstrap 5 + Sass (no Tailwind, ver
 ## Próximos pasos
 - Revisar si falta algo explícito de "Acceso Público" (prioridad 5) — en
   la práctica ya está satisfecho (catálogo/calendario/inicio públicos).
-- Responsividad y Accesibilidad WCAG 2.1 AA (prioridad 7, iterativa).
 - Registrar el `entityId` de esta app con el administrador del IdP de DGRE
   para poder probar el flujo SAML real (`SAML_SIMULATOR=false`).
 - Notificaciones por correo al solicitante (ya desbloqueadas por
@@ -67,3 +69,4 @@ coordinador`. El frontend usa Bootstrap 5 + Sass (no Tailwind, ver
     - Pruebas automatizadas: `php artisan test` (o `./vendor/bin/pest`)
     - Diagnóstico Continuum: `tools/continuum doctor`
     - Promover al primer administrador general: `php artisan users:set-role <email> coordinador`
+    - Auditoría de accesibilidad (axe-core/Playwright): `sail npm run test:a11y` (ver `tests/accessibility/README.md`)
